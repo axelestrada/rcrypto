@@ -1,5 +1,5 @@
 {
-  "name": "rcrypto",
+  "name": "@axelestrada/rcrypto",
   "version": "1.0.0",
   "description": "Simple AES-256-GCM encryption CLI",
   "main": "index.ts",
