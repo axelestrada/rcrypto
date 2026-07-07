@@ -17,7 +17,7 @@
   "license": "MIT",
   "author": "Axel Estrada",
   "bin": {
-    "retrocrypto": "./dist/src/index.js"
+    "retrocrypto": "dist/src/index.js"
   },
   "repository": {
     "type": "git",
