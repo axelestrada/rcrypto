@@ -17,11 +17,11 @@
   "license": "MIT",
   "author": "Axel Estrada",
   "bin": {
-    "rcrypto": "./dist/index.js"
+    "retrocrypto": "./dist/src/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/axelestrada/rcrypto"
+    "url": "git+https://github.com/axelestrada/rcrypto.git"
   },
   "type": "module",
   "dependencies": {
