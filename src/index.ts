@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { input, select, password } from "@inquirer/prompts";
-import { decrypt, encrypt } from "./cipher.ts";
+import { decrypt, encrypt } from "./cipher.js";
 import clipboard from "clipboardy";
 
 let running = true;
