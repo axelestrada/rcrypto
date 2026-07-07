@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "rootDir": "./",
+    "types": ["node"],
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["dist"]
+}
