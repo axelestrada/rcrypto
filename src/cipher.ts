@@ -3,7 +3,7 @@ import crypto from "node:crypto";
 const ALGORITHM = "aes-256-gcm";
 
 const KEY_LENGTH = 32; // 256 bits
-const ITERATIONS = 65536;
+const ITERATIONS = 600000;
 const SALT_LENGTH = 16;
 const IV_LENGTH = 12;
 const TAG_LENGTH = 16; // 128 bits
