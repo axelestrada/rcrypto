@@ -5,13 +5,13 @@ import { decrypt, encrypt } from "./cipher.js";
 import clipboard from "clipboardy";
 
 const HELP = `Uso:
-  rcrypto encrypt <texto> <clave>
-  rcrypto decrypt <texto-cifrado> <clave>
+  rcrypto encrypt <texto>
+  rcrypto decrypt <texto-cifrado>
   rcrypto -h | --help
 
 Sin argumentos, se abre el menú interactivo.
-Usa comillas para argumentos con espacios o caracteres especiales.
-La clave se pasa como argumento y puede quedar en el historial de la terminal.`;
+La herramienta solicitará la clave de forma interactiva.
+Usa comillas para argumentos con espacios o caracteres especiales.`;
 
 const args = process.argv.slice(2);
 
@@ -35,23 +35,32 @@ async function runCommand(commandArgs: string[]): Promise<void> {
     throw new Error(`Comando desconocido: ${command}. Usa "rcrypto -h" para ver la ayuda.`);
   }
 
-  if (values.length < 2) {
-    throw new Error(`Faltan argumentos. Uso: rcrypto ${command} <texto> <clave>`);
+  if (values.length === 0) {
+    throw new Error(`Falta el texto. Uso: rcrypto ${command} <texto>`);
   }
 
-  const password = values[values.length - 1];
-  const text = values.slice(0, -1).join(" ");
+  const text = values.join(" ");
 
-  if (!text || !password) {
-    throw new Error("El texto y la clave no pueden estar vacíos.");
+  if (!text) {
+    throw new Error("El texto no puede estar vacío.");
   }
 
-  if (command === "encrypt" && password.length < 6) {
-    throw new Error("La clave debe tener al menos 6 caracteres.");
-  }
+  const userPassword = await password({
+    message: "Clave:",
+    mask: "*",
+    validate: (value) => {
+      if (command === "encrypt" && value.length < 6) {
+        return "La clave debe tener al menos 6 caracteres.";
+      }
+
+      return true;
+    },
+  });
 
   const result =
-    command === "encrypt" ? encrypt(text, password) : decrypt(text, password);
+    command === "encrypt"
+      ? encrypt(text, userPassword)
+      : decrypt(text, userPassword);
 
   await clipboard.write(result);
   console.log(result);
